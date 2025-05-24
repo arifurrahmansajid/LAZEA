@@ -44,48 +44,14 @@ const AuthProvider = ({ children }) => {
   const userLogin = (email, password) => {
     // setLoading(true);
     return signInWithEmailAndPassword(auth, email, password)
-    // .then((res) => {
-    //   toast.success("Logged in successfully!");
-    //   return res;
-    // })
-    // .catch((err) => {
-    //   toast.error("Login failed: " + err.message);
-    // })
-    // .finally(() => setLoading(false));
+   
   };
 
-  // const logOut = async () => {
-  //   setLoading(true);
-  //   try {
-  //     try {
-  //       await signOut(auth);
-  //       toast.success("Logged out successfully!");
-  //     } catch (err) {
-  //       toast.error("Logout failed: " + err.message);
-  //     }
-  //   } finally {
-  //     return setLoading(false);
-  //   }
-  // };
+  
   const logOut =() => {
     setLoading(true);
     return signOut(auth);
   };
-
-  // const updateUserProfile = (updatedData) => {
-  //   if (!auth.currentUser) {
-  //     toast.error("No user is logged in.");
-  //     return;
-  //   }
-  
-  //   updateCurrentUser(auth, updatedData)
-  //     .then(() => {
-  //       toast.success("Profile updated successfully!");
-  //     })
-  //     .catch((error) => {
-  //       toast.error("Failed to update profile: " + error.message);
-  //     });
-  // };
 
   const updateUserProfile = (updatedData) => {
     return updateProfile(auth.currentUser, updatedData)

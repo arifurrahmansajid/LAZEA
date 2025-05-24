@@ -33,13 +33,21 @@ const router = createBrowserRouter([
       },
       {
         path: "update-equipment/:id",
-        element: <PrivateRouter> <UpdateProduct /></PrivateRouter>,
-        loader: ({params}) => fetch(`${import.meta.env.VITE_WEB_HOST_LINK}/${params.id}`)
+        element: <PrivateRouter><UpdateProduct /></PrivateRouter>,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_WEB_HOST_LINK}/product/${params.id}`),
+        errorElement: (
+          <div className="min-h-screen flex items-center justify-center">
+            <p className="text-xl text-red-600">
+              Error loading equipment. Please try again later.
+            </p>
+          </div>
+        ),
       },
       {
         path: "details-equipment/:id",
         element: <PrivateRouter> <ProductDetails /></PrivateRouter>,
-        loader: ({params}) => fetch(`${import.meta.env.VITE_WEB_HOST_LINK}/${params.id}`)
+        loader: ({ params }) => fetch(`${import.meta.env.VITE_WEB_HOST_LINK}/${params.id}`)
       },
       {
         path: "add-equipment",

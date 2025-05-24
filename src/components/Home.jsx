@@ -1,9 +1,11 @@
 import { useLoaderData } from 'react-router-dom';
 import Banner from './Banner';
 import ProductSection from './ProductSection';
-import SportsCategories from './SportsCategories';
-import Testimonials from './Testimonials';
+import SportsCategories from './PlantCategories ';
+//import Testimonials from './Testimonials';
 import UpcomingEvents from './UpcomingEvents';
+import CommonMistakes from './CommonMistakes';
+import BeginnerPlants from './BeginnerPlants';
 
 const Home = () => {
   const products = useLoaderData();
@@ -14,8 +16,9 @@ const Home = () => {
       <Banner />
       <SportsCategories />
       <ProductSection products={products} />
-      <Testimonials />
+      <BeginnerPlants/>
       <UpcomingEvents />
+      <CommonMistakes/>
     </div>
   );
 };

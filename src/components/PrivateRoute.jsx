@@ -1,22 +1,20 @@
-import { useContext } from "react";
-import { Navigate, useLocation } from "react-router-dom";
-import { AuthContext } from "./AuthContext";
+import React from "react";
+import { Link } from "react-router-dom";
+import notFoundImage from "../assets/3814263.jpg"; // adjust the path to your asset if needed
 
-const PrivateRouter = ({ children }) => {
-  const { user, loading } = useContext(AuthContext);
-  const location = useLocation();
-
-  if (loading) {
-    return <div className="flex min-h-screen justify-center items-center">
-      <span className="loading loading-bars loading-lg"></span>
+const NotFound = () => {
+  return (
+    <div className="min-h-screen flex flex-col justify-center items-center">
+      <img src={notFoundImage} alt="404 Not Found" className="w-full max-w-md" />
+      
+      <Link
+        to="/"
+        className="mt-6 bg-orange-600 text-white px-6 py-2 rounded-md text-lg hover:bg-orange-500"
+      >
+        Go Back to Home
+      </Link>
     </div>
-  };
-
-  if (!user || !user.email) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-
-  return children;
+  );
 };
 
-export default PrivateRouter;
+export default NotFound;

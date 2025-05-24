@@ -1,16 +1,17 @@
 import { useContext, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaGithub, FaGoogle } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet";
 import { AuthContext } from "./AuthContext";
 
 const Login = () => {
-  const { userLogin, setUser, logInWithGoogle, logInWithGithub } = useContext(AuthContext);
-  const [ error, setError ] = useState({});
-  const [ email, setEmail ] = useState("")
+  const { userLogin, setUser, logInWithGoogle } = useContext(AuthContext);
+  const [error, setError] = useState({});
+  const [email, setEmail] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
   const emailRef = useRef();
@@ -34,19 +35,11 @@ const Login = () => {
     logInWithGoogle()
       .then((result) => {
         console.log(result.user);
+        toast.success("Login successful!");
         navigate(from, { replace: true });
       })
       .catch((error) => console.log("ERROR", error.message));
   };
-
-  const handleGithubSignIn = () => {
-    logInWithGithub()
-    .then(result => {
-      console.log(result.user);
-      navigate(from, { replace: true });
-    })
-    .catch(error => console.log('ERROR', error.message))
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,7 +47,7 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log({email, password})
+    console.log({ email, password });
 
     if (!email || !password) {
       setError({ login: "Please provide valid email and password." });
@@ -62,20 +55,24 @@ const Login = () => {
     }
     
     userLogin(email, password)
-    .then((result) => {
-      const user = result.user;
-      setUser(user);
-      navigate(from, { replace: true });
-    })
-    .catch((err) => {
-      setError(handleErrorMessage(err.code));
-    })
-  }
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        toast.success("Login successful!");
+        setTimeout(() => {
+          navigate(from, { replace: true });
+        }, 1000); // 1 second delay
+      })
+      .catch((err) => {
+        const errorMessage = handleErrorMessage(err.code);
+        toast.error(errorMessage);
+      });
+  };
 
   const handleForgotPassword = () => {
     localStorage.setItem("email", email);
     navigate("/forgot-password");
-  }
+  };
 
   return (
     <div className="">
@@ -89,22 +86,15 @@ const Login = () => {
             <button 
               onClick={handleGoogleSignIn} 
               type="button" 
-              className="w-full flex items-center justify-center gap-4 py-2.5 px-4 text-sm tracking-wide font-bold border border-gray-300 rounded-md bg-transparent hover:text-white hover:bg-orange-600 dark:hover:border-orange-600 focus:outline-none"
+              className="w-full flex items-center justify-center gap-4 py-2.5 px-4 text-sm tracking-wide font-bold border border-gray-300 rounded-md bg-transparent hover:text-white hover:bg-[#78cc44] dark:hover:border-[#78cc44] focus:outline-none"
             >
-              <div className="text-xl"> <FaGoogle></FaGoogle> </div>
-              Continue with google
+              <div className="text-xl"> <FaGoogle /> </div>
+              Continue with Google
             </button>
-            <button 
-              onClick={handleGithubSignIn}
-              type="button" 
-              className="w-full flex items-center justify-center gap-4 py-2.5 px-4 text-sm tracking-wide font-bold border border-gray-300 rounded-md bg-transparent hover:text-white hover:bg-orange-600 dark:hover:border-orange-600 focus:outline-none"
-            >
-              <div className="text-xl"> <FaGithub></FaGithub> </div>
-              Continue with github
-            </button>
+           
             <div className="mt-6 flex items-center gap-4">
               <hr className="w-full " />
-              <p className="text-sm  text-center"> or </p>
+              <p className="text-sm text-center"> or </p>
               <hr className="w-full" />
             </div>
             <div className="form-control">
@@ -116,34 +106,49 @@ const Login = () => {
                 name="email"
                 type="email"
                 onChange={(e) => setEmail(e.target.value)} 
-                placeholder="email" className="input input-bordered"
-                required />
+                placeholder="email" 
+                className="input input-bordered"
+                required 
+              />
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text"> Password </span>
               </label>
-              <input  name="password" type="password" placeholder="password" className="input input-bordered" required />
-              {
-                error.login && (
+              <input 
+                name="password" 
+                type="password" 
+                placeholder="password" 
+                className="input input-bordered" 
+                required 
+              />
+              { error.login && (
                   <label className="label text-sm text-red-600">
                     {error.login}
                   </label>
                 )
               }
               <label onClick={handleForgotPassword} className="label">
-                <a href="forgot-password" className="label-text-alt link link-hover text-orange-600 hover:text-orange-400 font-semibold">Forgot password?</a>
+                <a href="forgot-password" className="label-text-alt link link-hover text-[#78cc44] hover:text-[#78cc44] font-semibold">
+                  Forgot password?
+                </a>
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn bg-orange-600 hover:bg-orange-500 border-none text-white rounded-md"> Login </button>
+              <button className="btn bg-[#78cc44] hover:bg-[#78cc44] border-none text-white rounded-md">
+                Login
+              </button>
             </div>
           </form>
-          <p className="text-sm flex items-center justify-center">Don't have an account! 
-            <Link to="/register" className="text-orange-600 font-semibold hover:underline ml-1 whitespace-nowrap"> Register here </Link>
+          <p className="text-sm flex items-center justify-center">
+            Don't have an account! 
+            <Link to="/register" className="text-[#78cc44] font-semibold hover:underline ml-1 whitespace-nowrap">
+              Register here
+            </Link>
           </p>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

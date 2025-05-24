@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Rancho&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.image-container {
+  overflow: hidden;
+}
+
+.hover-zoom {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+.image-container:hover .hover-zoom {
+  transform: scale(1.1); /* Slight zoom */
+}

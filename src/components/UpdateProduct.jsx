@@ -11,7 +11,7 @@ const UpdateProduct = () => {
   useEffect(() => {
     const fetchEquipment = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_WEB_HOST_LINK}/product/${id}`);
+        const response = await fetch(`https://plant-server-iota.vercel.app/product/${id}`);
         const data = await response.json();
         setEquipment(data);
       } catch (error) {
@@ -37,7 +37,7 @@ const UpdateProduct = () => {
     };
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_WEB_HOST_LINK}/product/${id}`, {
+      const response = await fetch(`https://plant-server-iota.vercel.app/product/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedEquipment),

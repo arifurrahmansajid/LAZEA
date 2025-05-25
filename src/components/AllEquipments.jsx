@@ -12,9 +12,7 @@ const AllEquipments = () => {
   useEffect(() => {
     const fetchEquipments = async () => {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_WEB_HOST_LINK}/product`
-        );
+        const response = await fetch("https://plant-server-iota.vercel.app/product");
         const data = await response.json();
         setEquipments(data);
         setFilteredEquipments(data);
@@ -51,7 +49,7 @@ const AllEquipments = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`${import.meta.env.VITE_WEB_HOST_LINK}/product/${id}`, {
+        fetch(`https://plant-server-iota.vercel.app/product/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -218,3 +216,4 @@ const AllEquipments = () => {
 };
 
 export default AllEquipments;
+

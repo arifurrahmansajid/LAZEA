@@ -10,7 +10,7 @@ import MyEquipment from "./components/MyEquipment";
 import AddEquipment from "./components/AddEquipment";
 import AllEquipments from "./components/AllEquipments";
 import NotFound from "./components/NotFound";
-import UpdateProduct from "./components/UpdateProduct"
+import UpdateProduct from "./components/UpdateProduct";
 import ProductDetails from "./components/ProductDetails";
 
 const router = createBrowserRouter([
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch(`${import.meta.env.VITE_WEB_HOST_LINK}/product`)
+        loader: () => fetch("https://plant-server-iota.vercel.app/product")
       },
       {
         path: "all-equipments",
@@ -29,13 +29,13 @@ const router = createBrowserRouter([
       },
       {
         path: "my-equipment",
-        element: <PrivateRouter> <MyEquipment /> </PrivateRouter>
+        element: <PrivateRouter><MyEquipment /></PrivateRouter>
       },
       {
         path: "update-equipment/:id",
         element: <PrivateRouter><UpdateProduct /></PrivateRouter>,
         loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_WEB_HOST_LINK}/product/${params.id}`),
+          fetch(`https://plant-server-iota.vercel.app/product/${params.id}`),
         errorElement: (
           <div className="min-h-screen flex items-center justify-center">
             <p className="text-xl text-red-600">
@@ -46,12 +46,13 @@ const router = createBrowserRouter([
       },
       {
         path: "details-equipment/:id",
-        element: <PrivateRouter> <ProductDetails /></PrivateRouter>,
-        loader: ({ params }) => fetch(`${import.meta.env.VITE_WEB_HOST_LINK}/${params.id}`)
+        element: <PrivateRouter><ProductDetails /></PrivateRouter>,
+        loader: ({ params }) => 
+          fetch(`https://plant-server-iota.vercel.app/${params.id}`)
       },
       {
         path: "add-equipment",
-        element: <PrivateRouter> <AddEquipment /> </PrivateRouter>
+        element: <PrivateRouter><AddEquipment /></PrivateRouter>
       },
       {
         path: "/login",

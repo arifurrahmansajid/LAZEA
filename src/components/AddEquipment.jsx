@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 const AddEquipment = () => {
-    const { user } = useContext(AuthContext);
-
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleAddPlant = async (e) => {
     e.preventDefault();
@@ -26,7 +27,7 @@ const AddEquipment = () => {
     };
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_WEB_HOST_LINK}/product`, {
+      const response = await fetch("https://plant-server-iota.vercel.app/product", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newPlant),

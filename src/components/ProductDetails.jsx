@@ -11,7 +11,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchEquipment = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_WEB_HOST_LINK}/product/${id}`);
+        const response = await fetch(`https://plant-server-iota.vercel.app/product/${id}`);
         const data = await response.json();
         setEquipment(data);
         setLoading(false);
@@ -85,7 +85,8 @@ const ProductDetails = () => {
                     {equipment.plantName}
                   </h1>
                   <p className="text-xl font-semibold text-green-700 mb-6">
-                    Health Status: <span className={`font-bold ${
+                    Health Status:{" "}
+                    <span className={`font-bold ${
                       equipment.healthStatus === 'Healthy' ? 'text-green-600' : 
                       equipment.healthStatus === 'Needs Care' ? 'text-yellow-600' : 'text-red-600'
                     }`}>
@@ -193,7 +194,8 @@ const ProductDetails = () => {
                 )}
               </div>
 
-           {/* <div className="flex space-x-4">
+              {/* Action Buttons
+              <div className="flex space-x-4">
                 <button className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors shadow-md hover:shadow-lg">
                   Add to Collection
                 </button>

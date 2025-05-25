@@ -16,7 +16,7 @@ const MyEquipmentList = () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await fetch(`${import.meta.env.VITE_WEB_HOST_LINK}/product`);
+        const response = await fetch("https://plant-server-iota.vercel.app/product");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -47,7 +47,7 @@ const MyEquipmentList = () => {
     if (!confirmResult.isConfirmed) return;
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_WEB_HOST_LINK}/product/${id}`, {
+      const response = await fetch(`https://plant-server-iota.vercel.app/product/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -115,7 +115,9 @@ const MyEquipmentList = () => {
   return (
     <div className="min-h-screen py-12 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">My Equipment List</h1>
+        <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">
+          My Equipment List
+        </h1>
         {userEquipments.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-600 text-lg mb-4">
@@ -177,7 +179,9 @@ const MyEquipmentList = () => {
                           d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                       </svg>
-                      <span className="text-gray-600">{equipment.careLevel}</span>
+                      <span className="text-gray-600">
+                        {equipment.careLevel}
+                      </span>
                     </div>
 
                     <div className="flex items-center">

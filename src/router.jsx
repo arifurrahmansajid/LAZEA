@@ -12,6 +12,14 @@ import AllEquipments from "./components/AllEquipments";
 import NotFound from "./components/NotFound";
 import UpdateProduct from "./components/UpdateProduct";
 import ProductDetails from "./components/ProductDetails";
+import Contact from "./components/Contact";
+import Support from "./components/Support";
+import AboutUs from "./components/AboutUs";
+import Dashboard from "./components/Dashboard";
+import DashboardOverview from "./components/DashboardOverview";
+import DashboardAllItems from "./components/DashboardAllItems";
+import DashboardAddItem from "./components/DashboardAddItem";
+import DashboardMyItems from "./components/DashboardMyItems";
 
 const router = createBrowserRouter([
   {
@@ -46,13 +54,25 @@ const router = createBrowserRouter([
       },
       {
         path: "details-equipment/:id",
-        element: <PrivateRouter><ProductDetails /></PrivateRouter>,
+        element: <ProductDetails />,
         loader: ({ params }) => 
           fetch(`https://plant-server-iota.vercel.app/${params.id}`)
       },
       {
         path: "add-equipment",
         element: <PrivateRouter><AddEquipment /></PrivateRouter>
+      },
+       {
+        path:"about-us",
+        element: <AboutUs/>
+      },
+      {
+        path:"contact",
+        element: <Contact/>
+      },
+      {
+        path:"support",
+        element: <Support/>
       },
       {
         path: "/login",
@@ -69,6 +89,16 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />
+      },
+      {
+        path: "dashboard",
+        element: <PrivateRouter><Dashboard /></PrivateRouter>,
+        children: [
+          { index: true, element: <DashboardOverview /> },
+          { path: "all-items", element: <DashboardAllItems /> },
+          { path: "add-item", element: <DashboardAddItem /> },
+          { path: "my-items", element: <DashboardMyItems /> },
+        ]
       },
       {
         path: "*",

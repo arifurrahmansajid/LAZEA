@@ -6,6 +6,9 @@ import SportsCategories from './PlantCategories ';
 import UpcomingEvents from './UpcomingEvents';
 import CommonMistakes from './CommonMistakes';
 import BeginnerPlants from './BeginnerPlants';
+import Promotions from './Promotions';
+import BlogSection from './BlogSection';
+import Newsletter from './Newsletter';
 
 const Home = () => {
   const products = useLoaderData();
@@ -19,6 +22,10 @@ const Home = () => {
       <BeginnerPlants/>
       <UpcomingEvents />
       <CommonMistakes/>
+      <Promotions/>
+      <BlogSection/>
+      <Newsletter />
+      {/* <Testimonials /> */}
     </div>
   );
 };

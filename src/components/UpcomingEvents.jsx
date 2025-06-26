@@ -1,6 +1,7 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 const UpcomingEvents = () => {
+  const navigate = useNavigate();
   const events = [
     {
       id: 1,
@@ -64,7 +65,7 @@ const UpcomingEvents = () => {
           ))}
         </ul>
         <div className="text-center mt-8">
-          <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium transition-colors">
+          <button   onClick={() => navigate("/notfound")} className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium transition-colors">
             View All Events
           </button>
         </div>

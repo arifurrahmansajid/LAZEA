@@ -4,6 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  @apply bg-white text-gray-800 transition-colors duration-300;
+}
+
+.dark html, .dark body {
+  @apply bg-gray-900 text-white transition-colors duration-300;
+}
+
 .image-container {
   overflow: hidden;
 }

@@ -3,8 +3,10 @@ import 'swiper/css';
 import "swiper/css/navigation";
 import { A11y, Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const navigate = useNavigate();
   const slides = [
     {
       id: 1,
@@ -69,7 +71,7 @@ const Banner = () => {
                   <p className="text-white/90 text-lg md:text-xl mb-8 font-sans">
                     {slide.description}
                   </p>
-                  <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium transition-colors">
+                  <button onClick={() => navigate("/notfound")} className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium transition-colors" >
                     Get Started
                   </button>
                 </div>

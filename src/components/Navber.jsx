@@ -39,7 +39,6 @@ const Navber = () => {
     try {
       await logOut();
       toast.success("Logout successful!");
-      // Delay navigation to allow toast to display before redirecting
       setTimeout(() => {
         navigate('/login');
       }, 1000);
@@ -50,8 +49,8 @@ const Navber = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-black shadow-sm">
-      <div className="navbar w-11/12 mx-auto">
+    <div className="sticky top-0 z-50 bg-[#78cc44] dark:bg-gray-900 shadow-sm transition-colors duration-300">
+      <div className="navbar w-full max-w-7xl mx-auto px-4">
         <div className="navbar-start">
           <div className="relative">
             <button
@@ -73,7 +72,7 @@ const Navber = () => {
               </svg>
             </button>
             {isMobileMenuOpen && (
-              <ul className="absolute top-12 left-0 bg-base-100 rounded-box shadow p-2 z-50 w-52">
+              <ul className="absolute top-12 left-0 bg-white rounded-box shadow p-2 z-50 w-52">
                 <li>
                   <Link to="/" onClick={() => setMobileMenuOpen(false)}>
                     Home
@@ -81,48 +80,78 @@ const Navber = () => {
                 </li>
                 <li>
                   <Link to="/all-equipments" onClick={() => setMobileMenuOpen(false)}>
-                    All Plants
+                    All Items
                   </Link>
                 </li>
                 <li>
-                  <Link to="/add-equipment" onClick={() => setMobileMenuOpen(false)}>
-                    Add Plant
+                  <Link to="/about-us" onClick={() => setMobileMenuOpen(false)}>
+                    About Us
                   </Link>
                 </li>
                 <li>
-                  <Link to="/my-equipment" onClick={() => setMobileMenuOpen(false)}>
-                    My Plants
+                  <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
+                    Contact
                   </Link>
                 </li>
+                <li>
+                  <Link to="/support" onClick={() => setMobileMenuOpen(false)}>
+                    Support
+                  </Link>
+                </li>
+                {user && (
+                  <>
+                    {/* Add Plant link for logged-in users 
+                    <li>
+                      <Link to="/add-equipment" onClick={() => setMobileMenuOpen(false)}>
+                        Add Plant
+                      </Link>
+                    </li>
+                    {/* My Plants link for logged-in users 
+                    <li>
+                      <Link to="/my-equipment" onClick={() => setMobileMenuOpen(false)}>
+                        My Plants
+                      </Link>
+                    </li>
+                    */}
+                    <li>
+                      <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+                        Dashboard
+                      </Link>
+                    </li>
+                  </>
+                )}
               </ul>
             )}
           </div>
           <Link to={'/'} className="flex items-center">
             <span
-              className="btn btn-ghost font-rancho text-3xl"
-              style={{ color: "#78cc44" }}
+              className="btn btn-ghost font-rancho text-3xl text-white dark:text-[#78cc44]"
+              style={{ color: "#fff" }}
             >
               LAZEA
             </span>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <div className="menu menu-horizontal dark:text-white gap-5 font-semibold font-raleway">
+          <div className="menu menu-horizontal gap-5 font-semibold font-raleway text-white dark:text-[#78cc44]">
             <Link to="/">Home</Link>
-            <Link to="/all-equipments">All Plants</Link>
-            <Link to="/add-equipment">Add Plant</Link>
-            <Link to="/my-equipment">My Plants</Link>
+            <Link to="/all-equipments">All Items</Link>
+            <Link to="/about-us">About Us</Link>
+            <Link to="/contact">Contact</Link>
+            <Link to="/support">Support</Link>
+            {user && (
+              <>
+                {/* Add Plant link for logged-in users 
+                <Link to="/add-equipment">Add Plant</Link>
+                {/* My Plants link for logged-in users 
+                <Link to="/my-equipment">My Plants</Link>
+                */}
+                <Link to="/dashboard">Dashboard</Link>
+              </>
+            )}
           </div>
         </div>
         <div className="navbar-end gap-3">
-          {/* Dark/Light Theme Toggle */}
-          <button 
-            onClick={handleToggleTheme}
-            className="btn btn-ghost text-xl"
-            title={darkMode ? "Switch to Light" : "Switch to Dark"}
-          >
-            {darkMode ? <FaSun /> : <FaMoon />}
-          </button>
           {user ? (
             <div className="flex gap-2">
               <div className="dropdown dropdown-end z-50">
@@ -137,7 +166,7 @@ const Navber = () => {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm border-2 border-[#78cc44] bg-[#78cc44] bg-opacity-20 gap-2 dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                  className="menu menu-sm border-2 border-[#fff] bg-[#fff] bg-opacity-90 gap-2 dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow"
                 >
                   <div className="flex flex-col items-center justify-center">
                     <img
@@ -152,19 +181,19 @@ const Navber = () => {
                       >
                         {user?.displayName}
                       </h3>
-                      <h3 className="text-center font-normal text-cyan-50">
+                      <h3 className="text-center font-normal text-gray-700">
                         {user?.email}
                       </h3>
                     </div>
                     <Link
                       to="/profile"
-                      className="btn bg-[#78cc44] hover:bg-[#78cc44] text-cyan-50 border-none w-28 mb-3"
+                      className="btn bg-[#78cc44] hover:bg-[#66aa33] text-white border-none w-28 mb-3"
                     >
                       My Profile
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="btn bg-[#78cc44] hover:bg-[#78cc44] text-white border-none w-28"
+                      className="btn bg-[#78cc44] hover:bg-[#66aa33] text-white border-none w-28"
                     >
                       Logout
                     </button>
@@ -174,7 +203,7 @@ const Navber = () => {
             </div>
           ) : (
             <div>
-              <Link to={'/login'} className="btn">
+              <Link to={'/login'} className="btn bg-white text-[#78cc44] border-none hover:bg-gray-100">
                 Login
               </Link>
             </div>

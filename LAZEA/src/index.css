@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Rancho&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  @apply bg-white text-gray-800 transition-colors duration-300;
+}
+
+.dark html, .dark body {
+  @apply bg-gray-900 text-white transition-colors duration-300;
+}
+
+.image-container {
+  overflow: hidden;
+}
+
+.hover-zoom {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+.image-container:hover .hover-zoom {
+  transform: scale(1.1); /* Slight zoom */
+}
